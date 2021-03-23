@@ -6,14 +6,13 @@ const Mainpage = ()=>{
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
 
-
     useEffect(() => {
-        fetch("http://ergast.com/api/f1/current/last/results.json")
+        fetch("http://ergast.com/api/f1/current/results.json?limit=1000")
             .then(res => res.json())
             .then(
                 (result) => {
                     setIsLoaded(true);
-                    setItems(result.MRData.RaceTable.Races[0]);
+                    setItems(result.MRData.RaceTable.Races.slice(result.MRData.RaceTable.Races.length -3));
                     console.log(result);
                 },
                 (error) => {
@@ -30,13 +29,21 @@ const Mainpage = ()=>{
     } else {
         return (
             <div>
-                <h1>{items.raceName}</h1>
-                <p>{items.season + " - Round " + items.round}</p>
-                {items.Results.map((item, key) => {
+                {items.map((item, key) => {
                     return(
-                        <div key={key}>
-                            <p>{item.position}</p>
-                            <p>{}</p>
+                        <div>
+                            <h1>{item.raceName}</h1>
+                            <p>{item.season + " - Round " + item.round}</p>
+                            {item.Results.map((item2, key2) => {
+                                return(
+                                    <div key={key2}>
+                                        <p>{item2.position}</p>
+                                        <p>{item2.Driver.givenName+" " +item2.Driver.familyName}</p>
+                                        <p>{"Constructor: " +item2.Constructor.name}</p>
+                                        <p>{"Time: "+item2.Time.time}</p>
+                                    </div>
+                                );
+                            })}
                         </div>
                     );
                 })}
