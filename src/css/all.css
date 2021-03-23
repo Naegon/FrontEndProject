@@ -1,13 +1,15 @@
 :root{
     /*Color*/
     --color-primary-red : #FF1801;/*red*/
-    --color-secondary_dark : #B272727;/*black*/
     --color-red_light : #FF6037;
     --color-red_dark : #C20000;
     --color-red_gradient: linear-gradient(180deg, #FF6037 0%, #FF1801 70%, #C20000 100%);
+
+    --color-secondary_dark : #272727;/*black*/
     --color-grey_light : #4F4F4F;
     --color-grey_dark : #000000;
     --color-grey_gradient : linear-gradient(180deg, #4F4F4F 0%, #272727 70%, #000000 100%);
+
     --color-red_error : #D50000;
     --color-green_success : #64DD17;
 }
