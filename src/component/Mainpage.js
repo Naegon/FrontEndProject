@@ -7,20 +7,31 @@ const Mainpage = ()=>{
     const [items, setItems] = useState([]);
     let consClassment = {};
     let constructorName = {};
+    let sizeclassment = [];
+    let index =0;
 
     const setclassment = (item)=>{
-
+        consClassment = {};
         for(const resultat of item){
-            let index = 0;
             if(resultat.Constructor.name in consClassment){
                 consClassment[resultat.Constructor.name] += parseInt(resultat.points);
-
             }
             else{
                 consClassment[resultat.Constructor.name] = parseInt(resultat.points);
                 constructorName[index] = resultat.Constructor.name;
-                index++;
+                index= index+1;
+                sizeclassment.push(1);
             }
+        }
+    }
+    const testprint =(key)=>{
+        const value = constructorName[key];
+        if(constructorName[key] != -1){
+            constructorName[key] = -1;
+            return <p> {value + " " +consClassment[value]}</p>;
+        }
+        else{
+            return;
         }
     }
 
@@ -31,8 +42,8 @@ const Mainpage = ()=>{
                 (result) => {
                     setIsLoaded(true);
                     setItems(result.MRData.RaceTable.Races.slice(result.MRData.RaceTable.Races.length -3));
-                    setclassment(result.MRData.RaceTable.Races[0].Results)
-                    // console.log(consClassment)
+                    console.log(consClassment)
+                    console.log(constructorName[1])
                 },
                 (error) => {
                     setIsLoaded(true);
@@ -64,22 +75,15 @@ const Mainpage = ()=>{
                                     </div>
                                 );
                             })}
-                        </div>
-                    );
-                })}
-                {items.map((item, key) => {
-                    setclassment(item.Results)
-                    return(
-                        <div>
+                            {setclassment(items[key].Results)}
                             <h1>Classement Constructeurs</h1>
-
-                            {/*{constructorName.map((item9) => {*/}
-                            {/*    console.log(item9)*/}
-                            {/*    // <p>{key}</p>*/}
-                            {/*    // <p>{item}</p>*/}
-                            {/*})*/}
-                            {/*}*/}
-
+                            {sizeclassment.map((item2, key2) => {
+                                return(
+                                    <div>
+                                        {testprint(key2)}
+                                    </div>
+                                );
+                            })}
                         </div>
                     );
                 })}
