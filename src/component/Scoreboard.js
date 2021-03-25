@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from "react";
 
-const Mainpage = ()=>{
+const Scoreboard = ()=>{
 
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -53,22 +53,22 @@ const Mainpage = ()=>{
 
     const displayscoreConstructor =(key)=>{
         const value = Constructor.constructorNames[key];
-        return <p> {value + " " +Constructor.Points[value]}</p>;
+            return <p> {value + " " +Constructor.Points[value]}</p>;
     }
 
     const displayscorePilot =(key)=>{
         const value = Pilot.PilotId[key];
         const value2 = Pilot.PilotConstructors[key];
-        return <p> {value + " " +value2 + " " +Pilot.Points[value]}</p>;
+            return <p> {value + " " +value2 + " " +Pilot.Points[value]}</p>;
     }
 
     useEffect(() => {
-        fetch("http://ergast.com/api/f1/current/results.json?limit=1000")
+        fetch("http://ergast.com/api/f1/2020/results.json?limit=1000")
             .then(res => res.json())
             .then(
                 (result) => {
                     setIsLoaded(true);
-                    setItems(result.MRData.RaceTable.Races.slice(result.MRData.RaceTable.Races.length -3));
+                    setItems(result.MRData.RaceTable.Races);
                 },
                 (error) => {
                     setIsLoaded(true);
@@ -87,37 +87,32 @@ const Mainpage = ()=>{
                 {items.map((item, key) => {
                     {setclassmentConstructor(items[key].Results)}
                     {setclassmentPilot(items[key].Results)}
-
-                    return(
-                        <div>
-                            <h1>{item.raceName}</h1>
-                            <p>{item.season + " - Round " + item.round}</p>
-                            <div>
-                                <h2>Classment Pilots</h2>
-                                {Pilot.PilotId.map((item2, key2) => {
-                                    return(
-                                        <div>
-                                            {displayscorePilot(key2)}
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                            <div>
-                                <h2>Classment Constructeurs</h2>
-                                {Constructor.constructorNames.map((item3, key3) => {
-                                    return(
-                                        <div>
-                                            {displayscoreConstructor(key3)}
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                );
                 })}
+                <div>
+                    <h1>Classment Pilot</h1>
+                    {Pilot.PilotId.map((item2, key2) => {
+                        return(
+                            <div>
+                                {displayscorePilot(key2)}
+                            </div>
+                        );
+                    })}
+                </div>
+                <div>
+                    <h1>Classment Constructeurs</h1>
+                    {Constructor.constructorNames.map((item3, key3) => {
+                        return(
+                            <div>
+                                {displayscoreConstructor(key3)}
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
         );
     }
 }
 
-export default Mainpage;
+export default Scoreboard;
+
+
