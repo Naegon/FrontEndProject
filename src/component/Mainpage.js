@@ -6,15 +6,15 @@ const Mainpage = ()=>{
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
 
-
     let content = {
         PilotClassments : {
-            PilotId: [],
-            PilotConstructors: [],
+            Id: [],
+            Name:[],
+            Constructors: [],
             Points : []
         },
         constructorClassments : {
-            constructorNames: [],
+            Name: [],
             Points : []
         }
     };
@@ -25,12 +25,12 @@ const Mainpage = ()=>{
 
     const setclassmentConstructor = (item)=>{
         for(const resultat of item){
-            if(Constructor.constructorNames.includes(resultat.Constructor.name)){
+            if(Constructor.Name.includes(resultat.Constructor.name)){
                 Constructor.Points[resultat.Constructor.name] += parseInt(resultat.points);
             }
             else{
                 Constructor.Points[resultat.Constructor.name] = parseInt(resultat.points);
-                Constructor.constructorNames[index] = resultat.Constructor.name;
+                Constructor.Name[index] = resultat.Constructor.name;
                 index= index+1;
             }
         }
@@ -38,28 +38,28 @@ const Mainpage = ()=>{
     const setclassmentPilot = (item)=>{
 
         for(const resultat of item){
-            if(Pilot.PilotId.includes(resultat.Driver.driverId)){
+            if(Pilot.Id.includes(resultat.Driver.driverId)){
                 Pilot.Points[resultat.Driver.driverId] += parseInt(resultat.points);
             }
             else{
                 Pilot.Points[resultat.Driver.driverId] = parseInt(resultat.points);
-                Pilot.PilotId[index] = resultat.Driver.driverId;
-                Pilot.PilotConstructors[index] = resultat.Constructor.name;
+                Pilot.Id[index] = resultat.Driver.driverId;
+                Pilot.Name[index] = resultat.Driver.familyName;
+                Pilot.Constructors[index] = resultat.Constructor.name;
                 index= index+1;
             }
         }
     }
 
-
     const displayscoreConstructor =(key)=>{
-        const value = Constructor.constructorNames[key];
+        const value = Constructor.Name[key];
         return <p> {value + " " +Constructor.Points[value]}</p>;
     }
 
     const displayscorePilot =(key)=>{
-        const value = Pilot.PilotId[key];
-        const value2 = Pilot.PilotConstructors[key];
-        return <p> {value + " " +value2 + " " +Pilot.Points[value]}</p>;
+        const value = Pilot.Id[key];
+        const value2 = Pilot.Constructors[key];
+        return <p> {Pilot.Name[key] + " " +value2 + " " +Pilot.Points[value]}</p>;
     }
 
     useEffect(() => {
@@ -94,7 +94,7 @@ const Mainpage = ()=>{
                             <p>{item.season + " - Round " + item.round}</p>
                             <div>
                                 <h2>Classment Pilots</h2>
-                                {Pilot.PilotId.map((item2, key2) => {
+                                {Pilot.Id.map((item2, key2) => {
                                     return(
                                         <div>
                                             {displayscorePilot(key2)}
@@ -104,7 +104,7 @@ const Mainpage = ()=>{
                             </div>
                             <div>
                                 <h2>Classment Constructeurs</h2>
-                                {Constructor.constructorNames.map((item3, key3) => {
+                                {Constructor.Name.map((item3, key3) => {
                                     return(
                                         <div>
                                             {displayscoreConstructor(key3)}
