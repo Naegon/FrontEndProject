@@ -26,6 +26,20 @@ const Scoreboard = ()=>{
 
     let index =0;
 
+    const callApi = () =>{
+        fetch("http://ergast.com/api/f1/"+year+"/results.json?limit=1000")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setItems(result.MRData.RaceTable.Races);
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                }
+            )
+    }
     const setclassmentConstructor = (item)=>{
         for(const resultat of item){
             if(Constructor.Name.includes(resultat.Constructor.name)){
@@ -68,18 +82,7 @@ const Scoreboard = ()=>{
     }
 
     useEffect(() => {
-        fetch("http://ergast.com/api/f1/2020/results.json?limit=1000")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setIsLoaded(true);
-                    setItems(result.MRData.RaceTable.Races);
-                },
-                (error) => {
-                    setIsLoaded(true);
-                    setError(error);
-                }
-            )
+        callApi()
     }, [])
 
     if (error) {
@@ -89,20 +92,20 @@ const Scoreboard = ()=>{
     } else {
         return (
             <div>
-                {/*<div>*/}
-                {/*    <h1>Choose year :</h1>*/}
-                {/*    <form>*/}
-                {/*        <input type="text" id="year" required minLength="4" maxLength="4" value="Year"></input>*/}
-                {/*        <input type="submit" value="Confirm" onClick={sendRequest}></input>*/}
-                {/*    </form>*/}
-                {/*</div>*/}
+                <div>
+                    <h1>Choose year :</h1>
+                    <form>
+                        <input type="text" id="year" required minLength="4" maxLength="4"></input>
+                        <input type="submit" value="Confirm" ></input>
+                    </form>
+                </div>
                 {items.map((item, key) => {
                     {setclassmentConstructor(items[key].Results)}
                     {setclassmentPilot(items[key].Results)}
                 })}
                 <div>
                     <h1>Classment Pilot</h1>
-                    <h2>{"Season - " + items[0].season }</h2>
+                    {/*<h2>{"Season - " + items[0].season }</h2>*/}
                     {Pilot.Id.map((item2, key2) => {
                         return(
                             <div>
@@ -113,7 +116,7 @@ const Scoreboard = ()=>{
                 </div>
                 <div>
                     <h1>Classment Constructeurs</h1>
-                    <h2>{"Season - " + items[0].season }</h2>
+                    {/*<h2>{"Season - " + items[0].season }</h2>*/}
                     {Constructor.Name.map((item3, key3) => {
                         return(
                             <div>
