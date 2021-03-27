@@ -6,7 +6,6 @@ const Scoreboard = ()=>{
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
     const [year, setYear] = useState(2020);
-    const [Apicall,setApicall] = useState(0);
 
     let content = {
         PilotClassments : {
@@ -89,11 +88,10 @@ const Scoreboard = ()=>{
     }
 
     useEffect(() => {
-        if(year == 2020){
-            console.log("here")
+        if(year === 2020){
             callApi()
         }
-    }, []);
+    }, );
 
     if (error) {
         return <div>Erreur : {error.message}</div>;
@@ -112,6 +110,7 @@ const Scoreboard = ()=>{
                 {items.map((item, key) => {
                     {setclassmentConstructor(items[key].Results)}
                     {setclassmentPilot(items[key].Results)}
+                    return
                 })}
                 <div>
                     <h1>Classment Pilot</h1>
