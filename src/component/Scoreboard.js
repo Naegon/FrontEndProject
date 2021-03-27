@@ -1,12 +1,12 @@
-import React, {useState,useEffect,useCallback} from "react";
+import React, {useState,useEffect} from "react";
 
 const Scoreboard = ()=>{
 
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
-    const [year, setYear] = useState([2020]);
-
+    const [year, setYear] = useState(2020);
+    const [Apicall,setApicall] = useState(0);
 
     let content = {
         PilotClassments : {
@@ -53,7 +53,6 @@ const Scoreboard = ()=>{
         }
     }
     const setclassmentPilot = (item)=>{
-
         for(const resultat of item){
             if(Pilot.Id.includes(resultat.Driver.driverId)){
                 Pilot.Points[resultat.Driver.driverId] += parseInt(resultat.points);
@@ -80,10 +79,21 @@ const Scoreboard = ()=>{
         const value2 = Pilot.Constructor[key];
             return <p> {Pilot.Surname[key]+" "+ Pilot.Name[key] + " " +value2 + " " +Pilot.Points[value]}</p>;
     }
+    let handleSubmit = () =>{
+        setIsLoaded(false);
+        callApi()
+    }
+
+    let handleChange = (event) =>{
+        setYear(event.target.value)
+    }
 
     useEffect(() => {
-        callApi()
-    }, [])
+        if(year == 2020){
+            console.log("here")
+            callApi()
+        }
+    }, []);
 
     if (error) {
         return <div>Erreur : {error.message}</div>;
@@ -94,9 +104,9 @@ const Scoreboard = ()=>{
             <div>
                 <div>
                     <h1>Choose year :</h1>
-                    <form>
-                        <input type="text" id="year" required minLength="4" maxLength="4"></input>
-                        <input type="submit" value="Confirm" ></input>
+                    <form method="get" onSubmit={handleSubmit}>
+                        <input type="text" id="Year" required minLength="4" maxLength="4" value={year} onChange={handleChange}></input>
+                        <input type="submit" value="Confirm"></input>
                     </form>
                 </div>
                 {items.map((item, key) => {
