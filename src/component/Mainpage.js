@@ -7,12 +7,9 @@ const Mainpage = ()=>{
     const [items, setItems] = useState([]);
 
     let content = {
-        PilotClassments : {
-            Id: [],
-            Name:[],
-            Constructors: [],
-            Points : []
-        },
+        PilotClassments : [
+            {id:"test",name:"test",constructor:"test",points:"test"}
+        ],
         constructorClassments : {
             Name: [],
             Points : []
@@ -38,14 +35,15 @@ const Mainpage = ()=>{
     const setclassmentPilot = (item)=>{
 
         for(const resultat of item){
-            if(Pilot.Id.includes(resultat.Driver.driverId)){
-                Pilot.Points[resultat.Driver.driverId] += parseInt(resultat.points);
+            // for(const )
+            if(Pilot.id.includes(resultat.Driver.driverId)){
+                Pilot.points[resultat.Driver.driverId] += parseInt(resultat.points);
             }
             else{
-                Pilot.Points[resultat.Driver.driverId] = parseInt(resultat.points);
-                Pilot.Id[index] = resultat.Driver.driverId;
-                Pilot.Name[index] = resultat.Driver.familyName;
-                Pilot.Constructors[index] = resultat.Constructor.name;
+                Pilot.points[resultat.Driver.driverId] = parseInt(resultat.points);
+                Pilot.id[index] = resultat.Driver.driverId;
+                Pilot.name[index] = resultat.Driver.familyName;
+                Pilot.Constructors[index] = resultat.constructor.name;
                 index= index+1;
             }
         }

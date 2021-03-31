@@ -3,23 +3,15 @@ import React, {useState,useEffect} from "react";
 const Compare = ()=>{
 
     const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    // const [items, setItems] = useState([]);
     const [year, setYear] = useState();
     const [circuit, setcircuit] = useState();
     const [selectedOption,setselectedOption] = useState();
 
-    let content = {
-        Pilot : {
-            Id: ["alonso","vettel"],
-            Name:["alonso","vettel"],
-            Surname: ["Fernando","Sebastian"],
-            Wins : [],
-            Perf :  [],
-            NbRaces :  [],
-        },
-    };
-    const Pilot = content.Pilot;
+    let content = [
+        { id:"badoer", name:"badoer",surname:"Luca",wins : null, perf :  null, nbRaces :null},
+        { id:"alonso", name:"alonso",surname:"Fernando",wins : null, perf :  null, nbRaces :null}
+    ];
+    const [pilot,setPilot] = useState(content) ;
 
     const callApi = (pilotName,url) =>{
         console.log(url);
@@ -49,57 +41,70 @@ const Compare = ()=>{
         }
         perf = perf/item.length;
 
-        Pilot.Perf[pilotName] = perf;
-        Pilot.NbRaces[pilotName] = item.length;
-        console.log(Pilot.Perf[pilotName],pilotName);
-        setIsLoaded(true);
+        for(const racer of content){
+            if(racer.id === pilotName){
+                racer.perf = perf;
+                racer.nbRaces = item.length;
+                console.log(racer.perf,pilotName);
+            }
+        }
+        content.sort((n1,n2) => n1.perf -n2.perf);
+        setPilot(content)
     }
     const setclassmentPilotWins = (item,pilotName)=>{
         let wins =0;
         for(const resultat of item){
             wins = wins +1;
         }
-        Pilot.Wins[pilotName] = wins;
-        console.log(Pilot.Wins[pilotName],pilotName);
-        setIsLoaded(true);
+        for(const racer of content){
+            if(racer.id === pilotName){
+                racer.wins = wins;
+                console.log(racer.wins,pilotName);
+            }
+        }
+        content.sort((n1,n2) => n2.wins -n1.wins);
+        setPilot(content)
     }
 
     const displayscorePilot =(key)=>{
-        const value = Pilot.Id[key];
-        console.log(Pilot.Wins[value],value);
-        if(Pilot.Wins[value] != null){
-            return <p> {Pilot.Name[key] + " " +Pilot.Surname[key] + " : " +Pilot.Wins[value]+" wins"}</p>;
+        let index =0;
+        for(const racer of content){
+            index++;
         }
-        else if(Pilot.Perf[value] != null){
-            return <p> {Pilot.Name[key] + " " +Pilot.Surname[key] + " : " +Pilot.Perf[value]+" ratio on "+Pilot.NbRaces[value]+" races"}</p>;
+        const value = pilot[key]
+        console.log(value.wins,value);
+        if(value.wins != null){
+            return <p> {value.name + " " +value.surname + " : " +value.wins+" wins"}</p>;
+        }
+        else if(value.perf != null){
+            return <p> {value.name + " " +value.surname + " : " +value.perf+" ratio on "+value.nbRaces+" races"}</p>;
         }
         else {
-            return <p> {Pilot.Name[key] + " " +Pilot.Surname[key]}</p>;
+            return <p> {value.name + " " +value.surname}</p>;
         }
     }
 
     let handleSubmit = () =>{
-        setIsLoaded(false);
         let urlwins ="";
         if(selectedOption === "Wins") {
             urlwins = "/1";
         }
-            for(const pilot of Pilot.Id){
-                console.log(pilot);
+            for(const Pilot of pilot){
+                console.log(Pilot);
                 let url = "";
                 if((year!=null) && (circuit!=null)){
-                    url = ("https://ergast.com/api/f1/"+year+"/drivers/"+pilot+"/circuits/"+circuit+"/results"+urlwins+".json");
+                    url = ("https://ergast.com/api/f1/"+year+"/drivers/"+Pilot.id+"/circuits/"+circuit+"/results"+urlwins+".json");
                 }
                 else if(year!=null){
-                    url = ("https://ergast.com/api/f1/"+year+"/drivers/"+pilot+"/results"+urlwins+".json?limit=100");
+                    url = ("https://ergast.com/api/f1/"+year+"/drivers/"+Pilot.id+"/results"+urlwins+".json?limit=100");
                 }
                 else if(circuit!=null){
-                    url = ("https://ergast.com/api/f1/drivers/"+pilot+"/circuits/"+circuit+"/results"+urlwins+".json?limit=100");
+                    url = ("https://ergast.com/api/f1/drivers/"+Pilot.id+"/circuits/"+circuit+"/results"+urlwins+".json?limit=100");
                 }
                 else{
-                    url = ("https://ergast.com/api/f1/drivers/"+pilot+"/results"+urlwins+".json?limit=500");//add limit=500 because of default 30 limit
+                    url = ("https://ergast.com/api/f1/drivers/"+Pilot.id+"/results"+urlwins+".json?limit=500");//add limit=500 because of default 30 limit
                 }
-                callApi(pilot,url);
+                callApi(Pilot.id,url);
             }
     }
 
@@ -114,41 +119,35 @@ const Compare = ()=>{
         console.log(event.target.value);
     }
 
-    useEffect(() => {
-        setIsLoaded(true);
-    }, [])
-
     if (error) {
         return <div>Erreur : {error.message}</div>;
-    } else if (!isLoaded) {
-        return <div>Chargement...</div>;
-    } else {
+    }  else {
         return (
             <div>
                 <div>
                     <h1>Compare Drivers:</h1>
-                    <form method="get" onSubmit={handleSubmit}>
+                    <form method="get">
                         <div>
                             <label>Year : </label>
-                            <input type="text" id="Year" minLength="4" maxLength="4" value={year} onChange={handleChangeYear}></input>
+                            <input type="number" id="Year" minLength="4" maxLength="4" value={year} onChange={handleChangeYear} />
                         </div>
                         <div>
                             <label>Circuit : </label>
-                            <input type="text" id="circuit" value={circuit} onChange={handleChangeCircuit}></input>
+                            <input type="text" id="circuit" value={circuit} onChange={handleChangeCircuit} />
                         </div>
                         <div>
-                            <input type="radio" id="performance" value="performance" onChange={handleOptionChange} ></input>
+                            <input type="radio" id="performance" value="performance" onChange={handleOptionChange} />
                             <label>Performance : </label>
-                            <input type="radio" id="wins" value="Wins" onChange={handleOptionChange}></input>
+                            <input type="radio" id="wins" value="Wins" onChange={handleOptionChange} />
                             <label>More Wins : </label>
                         </div>
-                        <input type="submit" value="Confirm"></input>
+                        <input type="onclick" value="Confirm" onClick={handleSubmit} />
                     </form>
                 </div>
 
                 <div>
                     <h1>Pilot on compare</h1>
-                    {Pilot.Id.map((item2, key2) => {
+                    {pilot.map((item2, key2) => {
                         return(
                             <div>
                                 {displayscorePilot(key2)}
