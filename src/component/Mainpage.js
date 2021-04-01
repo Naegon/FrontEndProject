@@ -1,4 +1,5 @@
 import React, {useState,useEffect} from "react";
+import CardMainpage from "./CardMainpage";
 
 const Mainpage = ()=>{
 
@@ -6,62 +7,40 @@ const Mainpage = ()=>{
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
 
-    let content = {
-        PilotClassments : [
-            {id:"test",name:"test",constructor:"test",points:"test"}
-        ],
-        constructorClassments : {
-            Name: [],
-            Points : []
-        }
-    };
-    const Pilot = content.PilotClassments;
-    const Constructor = content.constructorClassments;
-
-    let index =0;
+    let constructorArray = []
+    let pilotArray =[]
 
     const setclassmentConstructor = (item)=>{
-        for(const resultat of item){
-            if(Constructor.Name.includes(resultat.Constructor.name)){
-                Constructor.Points[resultat.Constructor.name] += parseInt(resultat.points);
+        let check = false;
+        let points = 0;
+        for(const resultat of item.Results){
+            for(const constructor of constructorArray){
+                if(constructor.name === (resultat.Constructor.name)){
+                    constructor.points += parseInt(resultat.points);
+                    check = true;
+                }
             }
-            else{
-                Constructor.Points[resultat.Constructor.name] = parseInt(resultat.points);
-                Constructor.Name[index] = resultat.Constructor.name;
-                index= index+1;
+            if(check === false) {
+                points = parseInt(resultat.points);
+                constructorArray[constructorArray.length] = {name: resultat.Constructor.name, points: points}
             }
+            check = false;
         }
+        constructorArray.sort((n1,n2) => n2.points -n1.points);
     }
     const setclassmentPilot = (item)=>{
-
-        for(const resultat of item){
-            // for(const )
-            if(Pilot.id.includes(resultat.Driver.driverId)){
-                Pilot.points[resultat.Driver.driverId] += parseInt(resultat.points);
-            }
-            else{
-                Pilot.points[resultat.Driver.driverId] = parseInt(resultat.points);
-                Pilot.id[index] = resultat.Driver.driverId;
-                Pilot.name[index] = resultat.Driver.familyName;
-                Pilot.Constructors[index] = resultat.constructor.name;
-                index= index+1;
-            }
+        let points =0;
+        for(const resultat of item.Results){
+            points = parseInt(resultat.points);
+            const id = resultat.Driver.driverId;
+            const name = resultat.Driver.familyName;
+            const constructor =  resultat.Constructor.name;
+            pilotArray[pilotArray.length] = {id:id,name:name,constructor:constructor,points:points}
         }
-    }
-
-    const displayscoreConstructor =(key)=>{
-        const value = Constructor.Name[key];
-        return <p> {value + " " +Constructor.Points[value]}</p>;
-    }
-
-    const displayscorePilot =(key)=>{
-        const value = Pilot.Id[key];
-        const value2 = Pilot.Constructors[key];
-        return <p> {Pilot.Name[key] + " " +value2 + " " +Pilot.Points[value]}</p>;
     }
 
     useEffect(() => {
-        fetch("http://ergast.com/api/f1/current/results.json?limit=1000")
+        fetch("http://ergast.com/api/f1/2020/results.json?limit=1000")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -81,38 +60,25 @@ const Mainpage = ()=>{
         return <div>Chargement...</div>;
     } else {
         return (
-            <div>
-                {items.map((item, key) => {
-                    {setclassmentConstructor(items[key].Results)}
-                    {setclassmentPilot(items[key].Results)}
-
-                    return(
-                        <div>
-                            <h1>{item.raceName}</h1>
-                            <p>{item.season + " - Round " + item.round}</p>
-                            <div>
-                                <h2>Classment Pilots</h2>
-                                {Pilot.Id.map((item2, key2) => {
-                                    return(
-                                        <div>
-                                            {displayscorePilot(key2)}
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                            <div>
-                                <h2>Classment Constructeurs</h2>
-                                {Constructor.Name.map((item3, key3) => {
-                                    return(
-                                        <div>
-                                            {displayscoreConstructor(key3)}
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                );
-                })}
+            <div className="c-container c-mainpage" id="mainpage">
+                <div className="c-mainpage__top">
+                    <h1 className="c-mainpage__top--title">Main</h1>
+                </div>
+                <div className="c-mainpage__wrapper">
+                    {items.map((item, key) => {
+                        {setclassmentPilot(item)}
+                        {setclassmentConstructor(item)}
+                        return(
+                            <CardMainpage
+                                key = {key}
+                                item = {item}
+                                localisation = {"Mainpage"}
+                                constructorClassments = {constructorArray}
+                                pilotclassment ={pilotArray}
+                            />
+                        );
+                    })}
+                </div>
             </div>
         );
     }

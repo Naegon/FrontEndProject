@@ -1,10 +1,10 @@
-import React, {useState,useEffect} from "react";
+import React, {useState} from "react";
 
 const Compare = ()=>{
 
     const [error, setError] = useState(null);
-    const [year, setYear] = useState();
-    const [circuit, setcircuit] = useState();
+    const [year, setYear] = useState("");
+    const [circuit, setcircuit] = useState("");
     const [selectedOption,setselectedOption] = useState();
 
     let content = [
@@ -52,13 +52,9 @@ const Compare = ()=>{
         setPilot(content)
     }
     const setclassmentPilotWins = (item,pilotName)=>{
-        let wins =0;
-        for(const resultat of item){
-            wins = wins +1;
-        }
         for(const racer of content){
             if(racer.id === pilotName){
-                racer.wins = wins;
+                racer.wins = item.length;
                 console.log(racer.wins,pilotName);
             }
         }
@@ -67,10 +63,6 @@ const Compare = ()=>{
     }
 
     const displayscorePilot =(key)=>{
-        let index =0;
-        for(const racer of content){
-            index++;
-        }
         const value = pilot[key]
         console.log(value.wins,value);
         if(value.wins != null){
@@ -141,7 +133,7 @@ const Compare = ()=>{
                             <input type="radio" id="wins" value="Wins" onChange={handleOptionChange} />
                             <label>More Wins : </label>
                         </div>
-                        <input type="onclick" value="Confirm" onClick={handleSubmit} />
+                        <input type="button" value="Confirm" onClick={handleSubmit} />
                     </form>
                 </div>
 
@@ -149,7 +141,7 @@ const Compare = ()=>{
                     <h1>Pilot on compare</h1>
                     {pilot.map((item2, key2) => {
                         return(
-                            <div>
+                            <div key={key2}>
                                 {displayscorePilot(key2)}
                             </div>
                         );
