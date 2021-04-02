@@ -8,9 +8,10 @@ const Mainpage = ()=>{
     const [items, setItems] = useState([]);
 
     let constructorArray = []
-    let pilotArray =[]
+    let pilotArray = []
 
     const setclassmentConstructor = (item)=>{
+        constructorArray = []
         let check = false;
         let points = 0;
         for(const resultat of item.Results){
@@ -29,6 +30,7 @@ const Mainpage = ()=>{
         constructorArray.sort((n1,n2) => n2.points -n1.points);
     }
     const setclassmentPilot = (item)=>{
+        pilotArray = []
         let points =0;
         for(const resultat of item.Results){
             points = parseInt(resultat.points);
