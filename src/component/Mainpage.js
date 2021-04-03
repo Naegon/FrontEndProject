@@ -10,6 +10,7 @@ const Mainpage = ()=>{
 
     let constructorArray = []
     let pilotArray = []
+    const array3 = [0,1,2]
 
     const setclassmentConstructor = (item)=>{
         constructorArray = []
@@ -65,7 +66,7 @@ const Mainpage = ()=>{
         return (
             <div className="c-container c-mainpage" id="mainpage">
                 <div className="c-mainpage__top">
-                    <h1 className="c-mainpage__top--title">Main</h1>
+                    <h1 className="c-mainpage__top--title">Latest Races</h1>
                 </div>
                 <div className="c-mainpage__wrapper">
                     {items.map((item, key) => {
@@ -78,6 +79,7 @@ const Mainpage = ()=>{
                                 localisation = {"Mainpage"}
                                 constructorClassments = {constructorArray}
                                 pilotclassment ={pilotArray}
+                                array3 ={array3}
                             />
                         );
                     })}

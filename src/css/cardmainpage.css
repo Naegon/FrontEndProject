@@ -1,16 +1,66 @@
 .c-mainpage__card{
     width: 400px;
     margin: 0 auto;
-    border: 1px solid white;
     font-family: Roboto;
+    background-color:#FF1801 ;
+    border-radius: 16px;
 }
 
 .c-mainpage__card-title h1{
     font-size: 32px;
-
+    color: #FAFAFA;
+    font-weight: bold;
+    margin-top: 10px;
 }
 .c-mainpage__card-title p{
     font-size: 24px;
     font-style: italic;
     color: #FAFAFA;
+}
+
+.c-mainpage__card-container{
+    margin: 15px;
+    border-radius: 16px;
+    background-color:#FAFAFA;
+    font-family: Lato;
+}
+
+.c-mainpage__card-container h2{
+    padding-top: 14px;
+}
+.c-mainpage_colName{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 16px;
+    font-style: italic;
+}
+
+.c-mainpage__card-content{
+    display: grid;
+    grid-template-columns: 1fr  1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 13px;
+    font-style: italic;
+}
+.c-mainpage__card-content p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.c-mainpage_colName-constructor{
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+.c-mainpage__card-content-container{
+    grid-template-columns: 1fr  1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+@media (max-width: 860px) {
+    .c-mainpage__card{
+        width: 320px;
+    }
+    .c-mainpage__card-title h1{
+        font-size: 1.75rem;
+    }
 }
