@@ -10,12 +10,12 @@
     font-size: 32px;
     color: #FAFAFA;
     font-weight: bold;
+    margin-top: 10px;
 }
 .c-mainpage__card-title p{
     font-size: 24px;
     font-style: italic;
     color: #FAFAFA;
-    margin-top: -16px;
 }
 
 .c-mainpage__card-container{
@@ -33,10 +33,7 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     gap: 0px 16px;
-    margin-top: -25px;
-    font-weight: bold;
     font-style: italic;
-    margin-bottom: -10px;
 }
 
 .c-mainpage__card-content{
@@ -51,24 +48,16 @@
     margin-bottom: 10px;
 }
 .c-mainpage_colName-constructor{
-    display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
-    gap: 0px 16px;
-    margin-top: -25px;
-    font-weight: bold;
-    font-style: italic;
-    margin-bottom: -10px;
 }
 .c-mainpage__card-content-container{
-    display: grid;
     grid-template-columns: 1fr  1fr 1fr;
     grid-template-rows: 1fr;
-    gap: 0px 13px;
-    font-style: italic;
-}
-.c-mainpage__card-content-container p {
-    margin-top: 10px;
-    margin-bottom: 10px;
 }
 
+@media (max-width: 860px) {
+    .c-mainpage__card{
+        width: 320px;
+    }
+}

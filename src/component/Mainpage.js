@@ -66,7 +66,7 @@ const Mainpage = ()=>{
         return (
             <div className="c-container c-mainpage" id="mainpage">
                 <div className="c-mainpage__top">
-                    <h1 className="c-mainpage__top--title">Main</h1>
+                    <h1 className="c-mainpage__top--title">Latest Races</h1>
                 </div>
                 <div className="c-mainpage__wrapper">
                     {items.map((item, key) => {

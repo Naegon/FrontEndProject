@@ -10,11 +10,10 @@
 }
 
 .c-mainpage__top--title{
-    display: inline-block;
-    font-family: "avenir", sans-serif;
-    /*padding-top: 128px;*/
-    margin-right: 16px;
+    padding-top: 64px;
+    padding-bottom: 64px;
     text-align: center;
+    color: #FAFAFA;
 }
 
 .c-mainpage__wrapper{
@@ -38,7 +37,7 @@
     -ms-grid-column: 5;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 860px) {
 
     .c-mainpage__top--title{
         padding-top: 72px;
