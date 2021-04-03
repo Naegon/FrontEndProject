@@ -7,10 +7,12 @@ const Scoreboard = ()=>{
     const [items, setItems] = useState([]);
     const [year, setYear] = useState("");
 
-    const [Pilotclassment,setPilotclassment] = useState([]) ;
-    const [constructorClassments,setconstructorClassments] = useState([]) ;
+    const initialstate =[]
+    const [Pilotclassment,setPilotclassment] = useState(initialstate) ;
+    const [constructorClassments,setconstructorClassments] = useState(initialstate) ;
     let constructorArray = []
     let pilotArray =[]
+
 
     const callApi = () =>{
         fetch("http://ergast.com/api/f1/"+year+"/results.json?limit=1000")
@@ -18,11 +20,6 @@ const Scoreboard = ()=>{
             .then(
                 (result) => {
                     setItems(result.MRData.RaceTable.Races);
-                    for(const item of result.MRData.RaceTable.Races){
-                        setclassmentConstructor(item);
-                        setclassmentPilot(item);
-                    }
-
                 },
                 (error) => {
                     setError(error);
@@ -47,7 +44,6 @@ const Scoreboard = ()=>{
             check = false;
         }
         constructorArray.sort((n1,n2) => n2.points -n1.points);
-        setconstructorClassments(constructorArray)
     }
     const setclassmentPilot = (item)=>{
         pilotArray = Pilotclassment
@@ -71,56 +67,55 @@ const Scoreboard = ()=>{
             check = false;
         }
         pilotArray.sort((n1,n2) => n2.points -n1.points);
-        setPilotclassment(pilotArray)
     }
 
-    const displayscoreConstructor =(key)=>{
-        const value = constructorClassments[key].name;
-        return <p> {value + " " +constructorClassments[key].points}</p>;
-    }
-
-    const displayscorePilot =(key)=>{
-        const value = Pilotclassment[key].constructor;
-        return <p> {Pilotclassment[key].surname+" "+ Pilotclassment[key].name + " " +value + " " +Pilotclassment[key].points}</p>;
-    }
     let handleSubmit = () =>{
+        for(const item of items){
+            setclassmentConstructor(item)
+            setclassmentPilot(item)
+        }
         callApi()
     }
 
     let handleChange = (event) =>{
         setYear(event.target.value)
+        setPilotclassment(pilotArray)
+        setconstructorClassments(constructorArray)
     }
 
     if (error) {
         return <div>Erreur : {error.message}</div>;
     }  else {
         return (
-            <div>
-                <div>
+            <div className="c-container c-scoreboard" id="scoreboard">
+                <div className="c-scoreboard-form">
                     <h1>Choose year :</h1>
-                    <form method="get" >
+                    <form>
                         <input type="number" id="Year" required minLength="4" maxLength="4" value={year} onChange={handleChange} />
                         <input type="button" value="Confirm" onClick={handleSubmit}/>
                     </form>
                 </div>
-                <div>
+                <div className="c-scoreboard-classment">
                     <h1>Classment Pilot</h1>
                     <h2>{"Season - " + year }</h2>
                     {Pilotclassment.map((item2, key2) => {
                         return(
-                            <div key={key2}>
-                                {displayscorePilot(key2)}
+                            <div className="c-scoreboard-content" key={key2}>
+                                <p> {Pilotclassment[key2].surname}</p>
+                                <p> {Pilotclassment[key2].name}</p>
+                                <p> {Pilotclassment[key2].points}</p>
                             </div>
                         );
                     })}
                 </div>
-                <div>
+                <div className="c-scoreboard-classment">
                     <h1>Classment Constructeurs</h1>
                     <h2>{"Season - " + year }</h2>
                     {constructorClassments.map((item3, key3) => {
                         return(
-                            <div key={key3}>
-                                {displayscoreConstructor(key3)}
+                            <div className="c-scoreboard-content" key={key3}>
+                                <p> {constructorClassments[key3].name}</p>
+                                <p> {constructorClassments[key3].points}</p>
                             </div>
                         );
                     })}
