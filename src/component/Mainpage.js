@@ -10,6 +10,7 @@ const Mainpage = ()=>{
 
     let constructorArray = []
     let pilotArray = []
+    const array3 = [0,1,2]
 
     const setclassmentConstructor = (item)=>{
         constructorArray = []
@@ -78,6 +79,7 @@ const Mainpage = ()=>{
                                 localisation = {"Mainpage"}
                                 constructorClassments = {constructorArray}
                                 pilotclassment ={pilotArray}
+                                array3 ={array3}
                             />
                         );
                     })}
