@@ -4,11 +4,16 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    font-family: Lato;
 }
 .c-scoreboard-form {
     color: white;
     display: flex;
-    align-items: center;
+    justify-content: center;
+    padding-top: 40px;
+}
+.c-scoreboard-form h1 {
+    padding-right: 10px;
 }
 
 .form-searchBar input[type="number"] {
@@ -17,11 +22,13 @@
     background-color: #FAFAFA;
     border-radius: 16px;
     border: none;
+    font-size: 1.25rem;
+    padding-left: 15px;
 }
 .form-searchBar input[type="button"] {
-    margin-left: -55px;
-    height: 40px;
-    width: 40px;
+    margin-left: -53px;
+    height: 35px;
+    width: 35px;
     padding:10px;
     border: none;
     background-color: #FAFAFA;
@@ -30,10 +37,69 @@
     background-position: center;
     background-size: cover;
 }
+.form-searchBar input[type="button"]:hover{
+    background-color: #c8c8c8;
+}
 .c-scoreboard-wrapper{
     display: flex;
-    align-items: stretch;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 .c-scoreboard-classment{
     color: white;
+    padding: 30px;
+    width: 600px;
+    margin-top: 50px;
+}
+.c-scoreboard-classment h1,h2,h4{
+    font-style: italic ;
+}
+.c-scoreboard-classment h2{
+    padding-bottom: 20px;
+}
+.c-scoreboard-grey{
+    background: linear-gradient(180deg, #4F4F4F 0%, #272727 72.4%, #000000 100%);
+    border-radius: 10px;
+}
+.c-scoreboard-black{
+    background: linear-gradient(180deg, #000000 0%, #272727 62.5%, #000000 100%);
+    border-radius: 10px;
+}
+
+.c-scoreboard_colName{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 64px;
+    font-style: italic;
+}
+.c-scoreboard_colName-constructor{
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.c-scoreboard-content{
+    display: grid;
+    grid-template-columns: 1fr  1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 13px;
+    font-style: italic;
+    align-items: center;
+}
+.c-scoreboard-content p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.c-scoreboard-content-container{
+    grid-template-columns: 1fr  1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 64px;
+}
+
+.e-scoreboard-pos{
+    background-color: #FAFAFA;
+    width: 50px;
+    color: black;
+    border-radius: 10px;
+
 }

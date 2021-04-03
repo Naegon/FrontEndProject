@@ -14,7 +14,7 @@ const CardMainpage = (props)=>{
                 <h2>Classment Pilots</h2>
                 <div className="c-mainpage_colName ">
                     <h4>Pos.</h4>
-                    <h4>Name</h4>
+                    <h4>Driver</h4>
                     <h4>Constructor</h4>
                     <h4>Points</h4>
                 </div>

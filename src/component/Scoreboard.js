@@ -91,32 +91,45 @@ const Scoreboard = ()=>{
         return (
             <div className="c-container c-scoreboard" id="scoreboard">
                 <div className="c-scoreboard-form">
-                    <h1>Choose year :</h1>
+                    <h1>Choose a year :</h1>
                     <form className="form-searchBar">
                         <input type="number" id="Year" required minLength="4" maxLength="4" value={year} onChange={handleChange} />
                         <input type="button" value=" " onClick={handleSubmit}/>
                     </form>
                 </div>
                 <div className="c-scoreboard-wrapper">
-                    <div className="c-scoreboard-classment">
+                    <div className="c-scoreboard-classment c-scoreboard-grey">
                         <h1>Classment Pilot</h1>
                         <h2>{"Season - " + year }</h2>
+                        <div className="c-mainpage_colName ">
+                            <h4>Pos.</h4>
+                            <h4>Driver</h4>
+                            <h4>Constructor</h4>
+                            <h4>Points</h4>
+                        </div>
                         {Pilotclassment.map((item2, key2) => {
                             return(
                                 <div className="c-scoreboard-content" key={key2}>
-                                    <p> {Pilotclassment[key2].surname}</p>
-                                    <p> {Pilotclassment[key2].name}</p>
+                                    <p className="e-scoreboard-pos">{key2+1}</p>
+                                    <p> {Pilotclassment[key2].surname+" "+Pilotclassment[key2].name}</p>
+                                    <p> {Pilotclassment[key2].constructor}</p>
                                     <p> {Pilotclassment[key2].points}</p>
                                 </div>
                             );
                         })}
                     </div>
-                    <div className="c-scoreboard-classment">
+                    <div className="c-scoreboard-classment c-scoreboard-black">
                         <h1>Classment Constructeurs</h1>
                         <h2>{"Season - " + year }</h2>
+                        <div className="c-scoreboard_colName c-scoreboard_colName-constructor">
+                            <h4>Pos.</h4>
+                            <h4>Constructor</h4>
+                            <h4>Points</h4>
+                        </div>
                         {constructorClassments.map((item3, key3) => {
                             return(
-                                <div className="c-scoreboard-content" key={key3}>
+                                <div className="c-scoreboard-content c-scoreboard-content-container" key={key3}>
+                                    <p className="e-scoreboard-pos">{key3+1}</p>
                                     <p> {constructorClassments[key3].name}</p>
                                     <p> {constructorClassments[key3].points}</p>
                                 </div>
