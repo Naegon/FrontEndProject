@@ -108,7 +108,6 @@ const Compare = ()=>{
     }
     let handleOptionChange = (event) =>{
         setselectedOption(event.target.value);
-        console.log(event.target.value);
     }
 
     if (error) {
@@ -136,7 +135,6 @@ const Compare = ()=>{
                         <input type="button" value="Confirm" onClick={handleSubmit} />
                     </form>
                 </div>
-
                 <div>
                     <h1>Pilot on compare</h1>
                     {pilot.map((item2, key2) => {

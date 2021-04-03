@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from "react";
 import CardMainpage from "./CardMainpage";
+import "../css/mainpage.css"
 
 const Mainpage = ()=>{
 
