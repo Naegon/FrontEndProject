@@ -1,85 +1,89 @@
-import React, {useState,useEffect} from "react";
+import React, {useState} from "react";
+
 
 const Scoreboard = ()=>{
 
     const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
-    const [year, setYear] = useState(2020);
+    const [year, setYear] = useState("");
 
-    let content = {
-        PilotClassments : {
-            Id: [],
-            Name: [],
-            Surname: [],
-            Constructor: [],
-            Points : []
-        },
-        constructorClassments : {
-            Name: [],
-            Points : []
-        }
-    };
-    const Pilot = content.PilotClassments;
-    const Constructor = content.constructorClassments;
-
-    let index =0;
+    const [Pilotclassment,setPilotclassment] = useState([]) ;
+    const [constructorClassments,setconstructorClassments] = useState([]) ;
+    let constructorArray = []
+    let pilotArray =[]
 
     const callApi = () =>{
         fetch("http://ergast.com/api/f1/"+year+"/results.json?limit=1000")
             .then(res => res.json())
             .then(
                 (result) => {
-                    setIsLoaded(true);
                     setItems(result.MRData.RaceTable.Races);
+                    for(const item of result.MRData.RaceTable.Races){
+                        setclassmentConstructor(item);
+                        setclassmentPilot(item);
+                    }
+
                 },
                 (error) => {
-                    setIsLoaded(true);
                     setError(error);
                 }
             )
     }
     const setclassmentConstructor = (item)=>{
-        for(const resultat of item){
-            if(Constructor.Name.includes(resultat.Constructor.name)){
-                Constructor.Points[resultat.Constructor.name] += parseInt(resultat.points);
+        let check = false;
+        let points = 0;
+        constructorArray = constructorClassments;
+        for(const resultat of item.Results){
+            for(const constructor of constructorClassments){
+                if(constructor.name === (resultat.Constructor.name)){
+                    constructor.points += parseInt(resultat.points);
+                    check = true;
+                }
             }
-            else{
-                Constructor.Points[resultat.Constructor.name] = parseInt(resultat.points);
-                Constructor.Name[index] = resultat.Constructor.name;
-                index= index+1;
+            if(check === false) {
+                points = parseInt(resultat.points);
+                constructorArray[constructorArray.length] = {name: resultat.Constructor.name, points: points}
             }
+            check = false;
         }
+        constructorArray.sort((n1,n2) => n2.points -n1.points);
+        setconstructorClassments(constructorArray)
     }
     const setclassmentPilot = (item)=>{
-        for(const resultat of item){
-            if(Pilot.Id.includes(resultat.Driver.driverId)){
-                Pilot.Points[resultat.Driver.driverId] += parseInt(resultat.points);
+        pilotArray = Pilotclassment
+        let check = false;
+        let points =0;
+        for(const resultat of item.Results){
+            for(const pilot of Pilotclassment){
+                if(pilot.id === (resultat.Driver.driverId)){
+                    pilot.points += parseInt(resultat.points);
+                    check = true;
+                }
             }
-            else{
-                Pilot.Points[resultat.Driver.driverId] = parseInt(resultat.points);
-                Pilot.Id[index] = resultat.Driver.driverId;
-                Pilot.Name[index] = resultat.Driver.familyName;
-                Pilot.Surname[index] = resultat.Driver.givenName;
-                Pilot.Constructor[index] = resultat.Constructor.name;
-                index= index+1;
+            if(check === false){
+                points = parseInt(resultat.points);
+                const id = resultat.Driver.driverId;
+                const name = resultat.Driver.familyName;
+                const surname = resultat.Driver.givenName;
+                const constructor =  resultat.Constructor.name;
+                pilotArray[pilotArray.length] = {id:id,name:name,surname:surname,constructor:constructor,points:points}
             }
+            check = false;
         }
+        pilotArray.sort((n1,n2) => n2.points -n1.points);
+        setPilotclassment(pilotArray)
     }
 
-
     const displayscoreConstructor =(key)=>{
-        const value = Constructor.Name[key];
-            return <p> {value + " " +Constructor.Points[value]}</p>;
+        const value = constructorClassments[key].name;
+        return <p> {value + " " +constructorClassments[key].points}</p>;
     }
 
     const displayscorePilot =(key)=>{
-        const value = Pilot.Id[key];
-        const value2 = Pilot.Constructor[key];
-            return <p> {Pilot.Surname[key]+" "+ Pilot.Name[key] + " " +value2 + " " +Pilot.Points[value]}</p>;
+        const value = Pilotclassment[key].constructor;
+        return <p> {Pilotclassment[key].surname+" "+ Pilotclassment[key].name + " " +value + " " +Pilotclassment[key].points}</p>;
     }
     let handleSubmit = () =>{
-        setIsLoaded(false);
         callApi()
     }
 
@@ -87,37 +91,24 @@ const Scoreboard = ()=>{
         setYear(event.target.value)
     }
 
-    useEffect(() => {
-        if(year === 2020){
-            callApi()
-        }
-    }, );
-
     if (error) {
         return <div>Erreur : {error.message}</div>;
-    } else if (!isLoaded) {
-        return <div>Chargement...</div>;
-    } else {
+    }  else {
         return (
             <div>
                 <div>
                     <h1>Choose year :</h1>
-                    <form method="get" onSubmit={handleSubmit}>
-                        <input type="text" id="Year" required minLength="4" maxLength="4" value={year} onChange={handleChange}></input>
-                        <input type="submit" value="Confirm"></input>
+                    <form method="get" >
+                        <input type="number" id="Year" required minLength="4" maxLength="4" value={year} onChange={handleChange} />
+                        <input type="button" value="Confirm" onClick={handleSubmit}/>
                     </form>
                 </div>
-                {items.map((item, key) => {
-                    {setclassmentConstructor(items[key].Results)}
-                    {setclassmentPilot(items[key].Results)}
-                    return
-                })}
                 <div>
                     <h1>Classment Pilot</h1>
-                    {/*<h2>{"Season - " + items[0].season }</h2>*/}
-                    {Pilot.Id.map((item2, key2) => {
+                    <h2>{"Season - " + year }</h2>
+                    {Pilotclassment.map((item2, key2) => {
                         return(
-                            <div>
+                            <div key={key2}>
                                 {displayscorePilot(key2)}
                             </div>
                         );
@@ -125,10 +116,10 @@ const Scoreboard = ()=>{
                 </div>
                 <div>
                     <h1>Classment Constructeurs</h1>
-                    {/*<h2>{"Season - " + items[0].season }</h2>*/}
-                    {Constructor.Name.map((item3, key3) => {
+                    <h2>{"Season - " + year }</h2>
+                    {constructorClassments.map((item3, key3) => {
                         return(
-                            <div>
+                            <div key={key3}>
                                 {displayscoreConstructor(key3)}
                             </div>
                         );

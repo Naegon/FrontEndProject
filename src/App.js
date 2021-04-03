@@ -7,9 +7,9 @@ import Compare from "./component/Compare";
 function App() {
   return (
     <div className="App">
-      {/*<Mainpage/>*/}
+      <Mainpage/>
       {/*<Scoreboard/>*/}
-      <Compare/>
+      {/*<Compare/>*/}
     </div>
   );
 }
