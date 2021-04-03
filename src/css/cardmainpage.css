@@ -60,4 +60,7 @@
     .c-mainpage__card{
         width: 320px;
     }
+    .c-mainpage__card-title h1{
+        font-size: 1.75rem;
+    }
 }

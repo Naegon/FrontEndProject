@@ -51,10 +51,11 @@
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
         flex-direction: column;
+        padding-bottom: 50px;
     }
 }
 
-@media (min-width: 769px) and (max-width: 1024px){
+@media (min-width: 769px) and (max-width: 1300px){
     .c-mainpage__wrapper{
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr;
