@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 
+import "../css/scoreboard.css"
+
 
 const Scoreboard = ()=>{
 
@@ -90,35 +92,37 @@ const Scoreboard = ()=>{
             <div className="c-container c-scoreboard" id="scoreboard">
                 <div className="c-scoreboard-form">
                     <h1>Choose year :</h1>
-                    <form>
+                    <form className="form-searchBar">
                         <input type="number" id="Year" required minLength="4" maxLength="4" value={year} onChange={handleChange} />
-                        <input type="button" value="Confirm" onClick={handleSubmit}/>
+                        <input type="button" value=" " onClick={handleSubmit}/>
                     </form>
                 </div>
-                <div className="c-scoreboard-classment">
-                    <h1>Classment Pilot</h1>
-                    <h2>{"Season - " + year }</h2>
-                    {Pilotclassment.map((item2, key2) => {
-                        return(
-                            <div className="c-scoreboard-content" key={key2}>
-                                <p> {Pilotclassment[key2].surname}</p>
-                                <p> {Pilotclassment[key2].name}</p>
-                                <p> {Pilotclassment[key2].points}</p>
-                            </div>
-                        );
-                    })}
-                </div>
-                <div className="c-scoreboard-classment">
-                    <h1>Classment Constructeurs</h1>
-                    <h2>{"Season - " + year }</h2>
-                    {constructorClassments.map((item3, key3) => {
-                        return(
-                            <div className="c-scoreboard-content" key={key3}>
-                                <p> {constructorClassments[key3].name}</p>
-                                <p> {constructorClassments[key3].points}</p>
-                            </div>
-                        );
-                    })}
+                <div className="c-scoreboard-wrapper">
+                    <div className="c-scoreboard-classment">
+                        <h1>Classment Pilot</h1>
+                        <h2>{"Season - " + year }</h2>
+                        {Pilotclassment.map((item2, key2) => {
+                            return(
+                                <div className="c-scoreboard-content" key={key2}>
+                                    <p> {Pilotclassment[key2].surname}</p>
+                                    <p> {Pilotclassment[key2].name}</p>
+                                    <p> {Pilotclassment[key2].points}</p>
+                                </div>
+                            );
+                        })}
+                    </div>
+                    <div className="c-scoreboard-classment">
+                        <h1>Classment Constructeurs</h1>
+                        <h2>{"Season - " + year }</h2>
+                        {constructorClassments.map((item3, key3) => {
+                            return(
+                                <div className="c-scoreboard-content" key={key3}>
+                                    <p> {constructorClassments[key3].name}</p>
+                                    <p> {constructorClassments[key3].points}</p>
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         );

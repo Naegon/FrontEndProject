@@ -8,8 +8,8 @@ import Compare from "./component/Compare";
 function App() {
   return (
     <div className="App">
-      <Mainpage/>
-      {/*<Scoreboard/>*/}
+      {/*<Mainpage/>*/}
+      <Scoreboard/>
       {/*<Compare/>*/}
     </div>
   );

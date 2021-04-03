@@ -1,0 +1,39 @@
+.c-scoreboard{
+    position: relative;
+    background-image: url("../ressources/images/background_scoreboard.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.c-scoreboard-form {
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.form-searchBar input[type="number"] {
+    height: 50px;
+    width: 200px;
+    background-color: #FAFAFA;
+    border-radius: 16px;
+    border: none;
+}
+.form-searchBar input[type="button"] {
+    margin-left: -55px;
+    height: 40px;
+    width: 40px;
+    padding:10px;
+    border: none;
+    background-color: #FAFAFA;
+    background-image: url("../ressources/svg/loupe.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.c-scoreboard-wrapper{
+    display: flex;
+    align-items: stretch;
+}
+.c-scoreboard-classment{
+    color: white;
+}
