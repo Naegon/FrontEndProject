@@ -1,3 +1,11 @@
+.c-comparepage{
+    position: relative;
+    background-image: url("../ressources/images/BackgroundImage1.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
 .c-compare__form {
     display: flex;
     justify-content: center;
@@ -16,6 +24,42 @@
     font-size: 1.25rem;
     padding-left: 15px;
 }
+
+#year
+{
+    width: 60%;
+}
+
+#circuit
+{
+    width: 60%;
+}
+
+
+
+
+#compareDrivers
+{
+    border-style: solid;
+    border-color: black;
+
+    display: block;
+    margin: auto;
+    width: 40%;
+    padding: 20px;
+
+    border-radius: 10px;
+
+    background-color: black;
+    color: white;
+}
+
+#compareDriversTitle
+{
+    padding-bottom: 20px;
+}
+
+
 
 
 
@@ -50,3 +94,33 @@
     visibility: hidden;
 }
 
+
+
+
+
+
+#PilotOnCompare
+{
+    border-style: solid;
+    border-color: black;
+
+    display: block;
+    margin: 50px auto;
+    width: 40%;
+    padding: 20px;
+
+    border-radius: 10px;
+
+    background-color: black;
+    color: white;
+}
+
+#PilotOnCompareTitle
+{
+    padding-bottom: 20px;
+}
+
+.PilotOnCompare p
+{
+    color: black;
+}

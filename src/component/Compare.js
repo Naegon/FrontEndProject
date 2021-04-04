@@ -128,13 +128,13 @@ const Compare = ()=>{
         return <div>Erreur : {error.message}</div>;
     }  else {
         return (
-            <div>
-                <div>
-                    <h1>Compare Drivers:</h1>
+            <div className="c-container c-comparepage" id="comparepage">
+                <div id="compareDrivers">
+                    <h1 id="compareDriversTitle">Compare Drivers:</h1>
                     <FormControl className="c-compare__form" component="fieldset">
                         <div>
                             <label>Year : </label>
-                            <input type="number" id="Year" minLength="4" maxLength="4" value={year} onChange={handleChangeYear} />
+                            <input type="number" id="year" minLength="4" maxLength="4" value={year} onChange={handleChangeYear} />
                         </div>
                         <div>
                             <label>Circuit : </label>
@@ -154,8 +154,8 @@ const Compare = ()=>{
                     </div>
 
                 </div>
-                <div>
-                    <h1>Pilot on compare</h1>
+                <div id="PilotOnCompare">
+                    <h1 id="PilotOnCompareTitle">Pilot on compare</h1>
                     {pilot.map((item2, key2) => {
                         return(
                             <div key={key2}>
