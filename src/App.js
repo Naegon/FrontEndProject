@@ -4,13 +4,16 @@ import Mainpage from "./component/Mainpage";
 import "../src/css/all.css"
 import Scoreboard from "./component/Scoreboard";
 import Compare from "./component/Compare";
+import Navbar from "./component/Navbar";
 
 function App() {
   return (
     <div className="App">
-      <Mainpage/>
-      <Scoreboard/>
+        <Navbar/>
+        <Mainpage/>
+        <Scoreboard/>
       {/*<Compare/>*/}
+
     </div>
   );
 }
