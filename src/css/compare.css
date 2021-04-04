@@ -1,0 +1,117 @@
+.c-compare{
+    position: relative;
+    background-image: url("../ressources/images/BackgroundImage1.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding-top: 128px;
+    font-family: Lato;
+}
+
+.c-compare__filterDriver
+{
+    margin: auto;
+    width: 40%;
+    padding: 20px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #000000 0%, #272727 62.5%, #000000 100%);
+    opacity: 90%;
+    color: white;
+}
+
+#compareDriversTitle
+{
+    padding-bottom: 20px;
+    font-style: italic;
+    font-size: 2.5rem;
+}
+
+.c-compare__form {
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+}
+
+.c-compare__form input[type="number"],input[type="text"] {
+    height: 25px;
+    width: 60%;
+    background-color: #FAFAFA;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+    padding-left: 15px;
+    margin-bottom: 15px;
+}
+.c-compare__form input[type="number"]{
+    margin-left: 13px;
+}
+.c-compare__form input[type="text"]{
+    margin-right: 15px;
+}
+#circuitlabel{
+   padding-right: 13px;
+}
+#radio_compare{
+    color: #FAFAFA;
+}
+
+#buttonConfirm{
+    background-color: #FAFAFA;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.c-compare__popup{
+    display: flex;
+    justify-content: center;
+}
+.Popup{
+    font-family: Roboto;
+    position:fixed;
+    top:20%;
+    background-color: #dedddd;
+    padding: 100px;
+    border-radius: 10px;
+    background-color: #FF1801;
+}
+.Popup h1{
+    color: #FAFAFA;
+}
+.Popup button{
+    margin-top: 15px;
+    padding: 5px;
+    background-color: #FAFAFA;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.Popup button:hover{
+    background-color: #cdcdcd;
+}
+.hidepopup{
+    visibility: hidden;
+}
+
+
+#PilotOnCompare
+{
+    display: block;
+    margin: 50px auto;
+    width: 40%;
+    padding: 20px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #000000 0%, #272727 62.5%, #000000 100%);
+    opacity: 90%;
+    color: white;
+}
+
+#PilotOnCompareTitle
+{
+    padding-bottom: 20px;
+}
+
+.PilotOnCompare p
+{
+    color: black;
+}

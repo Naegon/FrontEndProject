@@ -1,11 +1,17 @@
 import React, {useState} from "react";
+import "../css/compare.css"
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
 
 const Compare = ()=>{
 
     const [error, setError] = useState(null);
     const [year, setYear] = useState("");
     const [circuit, setcircuit] = useState("");
-    const [selectedOption,setselectedOption] = useState();
+    const [selectedOption,setselectedOption] = useState("");
+    const [showPopup,setshowPopup] = useState(false)
 
     let content = [
         { id:"badoer", name:"badoer",surname:"Luca",wins : null, perf :  null, nbRaces :null},
@@ -39,7 +45,7 @@ const Compare = ()=>{
 
            perf += parseInt(resultat.Results[0].position);
         }
-        perf = perf/item.length;
+        perf = parseInt(perf/item.length);
 
         for(const racer of content){
             if(racer.id === pilotName){
@@ -49,7 +55,6 @@ const Compare = ()=>{
             }
         }
         content.sort((n1,n2) => n1.perf -n2.perf);
-        setPilot(content)
     }
     const setclassmentPilotWins = (item,pilotName)=>{
         for(const racer of content){
@@ -59,7 +64,6 @@ const Compare = ()=>{
             }
         }
         content.sort((n1,n2) => n2.wins -n1.wins);
-        setPilot(content)
     }
 
     const displayscorePilot =(key)=>{
@@ -84,13 +88,13 @@ const Compare = ()=>{
             for(const Pilot of pilot){
                 console.log(Pilot);
                 let url = "";
-                if((year!=null) && (circuit!=null)){
+                if((year!="") && (circuit!="")){
                     url = ("https://ergast.com/api/f1/"+year+"/drivers/"+Pilot.id+"/circuits/"+circuit+"/results"+urlwins+".json");
                 }
-                else if(year!=null){
+                else if(year!=""){
                     url = ("https://ergast.com/api/f1/"+year+"/drivers/"+Pilot.id+"/results"+urlwins+".json?limit=100");
                 }
-                else if(circuit!=null){
+                else if(circuit!=""){
                     url = ("https://ergast.com/api/f1/drivers/"+Pilot.id+"/circuits/"+circuit+"/results"+urlwins+".json?limit=100");
                 }
                 else{
@@ -98,45 +102,60 @@ const Compare = ()=>{
                 }
                 callApi(Pilot.id,url);
             }
+        setPilot(content)
+        setPilot(content)
+        togglePopup()
     }
 
-    let handleChangeYear = (event) =>{
+    const handleChangeYear = (event) =>{
         setYear(event.target.value);
     }
-    let handleChangeCircuit = (event) =>{
+    const handleChangeCircuit = (event) =>{
         setcircuit(event.target.value);
     }
-    let handleOptionChange = (event) =>{
+    const handleOptionChange = (event) =>{
         setselectedOption(event.target.value);
+        console.log(event.target.value)
+    }
+    const togglePopup = () => {
+        setshowPopup(true)
+    }
+    const disactivePopup = () => {
+        setshowPopup(false)
     }
 
     if (error) {
         return <div>Erreur : {error.message}</div>;
     }  else {
         return (
-            <div>
-                <div>
-                    <h1>Compare Drivers:</h1>
-                    <form method="get">
+            <div className="c-container c-compare" id="compare">
+                <div className="c-compare__filterDriver">
+                    <h1 id="compareDriversTitle">Compare Drivers:</h1>
+                    <FormControl className="c-compare__form" component="fieldset">
                         <div>
                             <label>Year : </label>
-                            <input type="number" id="Year" minLength="4" maxLength="4" value={year} onChange={handleChangeYear} />
+                            <input type="number" id="year" minLength="4" maxLength="4" value={year} onChange={handleChangeYear} />
                         </div>
                         <div>
-                            <label>Circuit : </label>
+                            <label id="circuitlabel">Circuit : </label>
                             <input type="text" id="circuit" value={circuit} onChange={handleChangeCircuit} />
                         </div>
-                        <div>
-                            <input type="radio" id="performance" value="performance" onChange={handleOptionChange} />
-                            <label>Performance : </label>
-                            <input type="radio" id="wins" value="Wins" onChange={handleOptionChange} />
-                            <label>More Wins : </label>
+                        <RadioGroup aria-label="gender" name="gender1" value={selectedOption} onChange={handleOptionChange}>
+                            <FormControlLabel id="radio_compare"  value="performance" control={<Radio />} label="Performance" />
+                            <FormControlLabel value="Wins" control={<Radio />} label="Wins" />
+                        </RadioGroup>
+                        <input id="buttonConfirm" type="button" value="Confirm" onClick={handleSubmit} />
+                    </FormControl>
+                    <div className="c-compare__popup">
+                        <div className={showPopup ? " Popup" : "Popup hidepopup"}>
+                            <h1>Compare set</h1>
+                            <button onClick={disactivePopup}>Close</button>
                         </div>
-                        <input type="button" value="Confirm" onClick={handleSubmit} />
-                    </form>
+                    </div>
+
                 </div>
-                <div>
-                    <h1>Pilot on compare</h1>
+                <div id="PilotOnCompare">
+                    <h1 id="PilotOnCompareTitle">Pilot on compare</h1>
                     {pilot.map((item2, key2) => {
                         return(
                             <div key={key2}>

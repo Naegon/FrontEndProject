@@ -12,8 +12,7 @@ function App() {
         <Navbar/>
         <Mainpage/>
         <Scoreboard/>
-      {/*<Compare/>*/}
-
+        <Compare/>
     </div>
   );
 }
