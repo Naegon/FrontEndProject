@@ -1,4 +1,7 @@
 # FrontEndProject
+
+Our project was made by mob programming in order to be more efficient. So if there is only one person committing it's normal.
+
 *4th year front end project at Efrei Paris*
 
 ## Topic
