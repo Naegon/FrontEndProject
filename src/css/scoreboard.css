@@ -31,7 +31,7 @@
     width: 35px;
     padding:10px;
     border: none;
-    background-color: #FAFAFA;
+    background-color: white;
     background-image: url("../ressources/svg/loupe.svg");
     background-repeat: no-repeat;
     background-position: center;
@@ -114,11 +114,25 @@
     .c-scoreboard-classment{
         padding-bottom: 100px;
     }
+    .c-scoreboard{
+        padding-top: 80px;
+
+    }
 }
 @media (min-width: 1025px) and (max-width: 1500px){
 
     .c-scoreboard-classment{
-        padding-bottom: 50px;
+        padding-bottom: 30px;
         margin-top: 20px;
+    }
+    .c-scoreboard{
+        padding-top: 90px;
+    }
+
+}
+@media (min-width: 1500px){
+    .c-scoreboard{
+        padding-top: 110px;
+
     }
 }
