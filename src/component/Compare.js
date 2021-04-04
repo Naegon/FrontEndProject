@@ -45,7 +45,7 @@ const Compare = ()=>{
 
            perf += parseInt(resultat.Results[0].position);
         }
-        perf = perf/item.length;
+        perf = parseInt(perf/item.length);
 
         for(const racer of content){
             if(racer.id === pilotName){
@@ -128,8 +128,8 @@ const Compare = ()=>{
         return <div>Erreur : {error.message}</div>;
     }  else {
         return (
-            <div className="c-container c-comparepage" id="comparepage">
-                <div id="compareDrivers">
+            <div className="c-container c-compare" id="compare">
+                <div className="c-compare__filterDriver">
                     <h1 id="compareDriversTitle">Compare Drivers:</h1>
                     <FormControl className="c-compare__form" component="fieldset">
                         <div>
@@ -137,14 +137,14 @@ const Compare = ()=>{
                             <input type="number" id="year" minLength="4" maxLength="4" value={year} onChange={handleChangeYear} />
                         </div>
                         <div>
-                            <label>Circuit : </label>
+                            <label id="circuitlabel">Circuit : </label>
                             <input type="text" id="circuit" value={circuit} onChange={handleChangeCircuit} />
                         </div>
                         <RadioGroup aria-label="gender" name="gender1" value={selectedOption} onChange={handleOptionChange}>
-                            <FormControlLabel value="performance" control={<Radio />} label="Performance" />
+                            <FormControlLabel id="radio_compare"  value="performance" control={<Radio />} label="Performance" />
                             <FormControlLabel value="Wins" control={<Radio />} label="Wins" />
                         </RadioGroup>
-                        <input type="button" value="Confirm" onClick={handleSubmit} />
+                        <input id="buttonConfirm" type="button" value="Confirm" onClick={handleSubmit} />
                     </FormControl>
                     <div className="c-compare__popup">
                         <div className={showPopup ? " Popup" : "Popup hidepopup"}>
