@@ -107,7 +107,7 @@ const Scoreboard = ()=>{
                             <h4>Constructor</h4>
                             <h4>Points</h4>
                         </div>
-                        {Pilotclassment.map((item2, key2) => {
+                        {Pilotclassment.slice(0, 10).map((item2, key2) => {
                             return(
                                 <div className="c-scoreboard-content" key={key2}>
                                     <p className="e-scoreboard-pos">{key2+1}</p>
@@ -126,12 +126,12 @@ const Scoreboard = ()=>{
                             <h4>Constructor</h4>
                             <h4>Points</h4>
                         </div>
-                        {constructorClassments.map((item3, key3) => {
+                        {constructorClassments.slice(0, 10).map((item3, key3) => {
                             return(
                                 <div className="c-scoreboard-content c-scoreboard-content-container" key={key3}>
                                     <p className="e-scoreboard-pos">{key3+1}</p>
-                                    <p> {constructorClassments[key3].name}</p>
-                                    <p> {constructorClassments[key3].points}</p>
+                                    <p> {item3.name}</p>
+                                    <p> {item3.points}</p>
                                 </div>
                             );
                         })}
