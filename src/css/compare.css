@@ -1,0 +1,52 @@
+.c-compare__form {
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+}
+.c-scoreboard-form h1 {
+    padding-right: 10px;
+}
+
+.form-searchBar input[type="number"] {
+    height: 50px;
+    width: 200px;
+    background-color: #FAFAFA;
+    border-radius: 16px;
+    border: none;
+    font-size: 1.25rem;
+    padding-left: 15px;
+}
+
+
+
+
+.c-compare__popup{
+    display: flex;
+    justify-content: center;
+}
+.Popup{
+    font-family: Roboto;
+    position:fixed;
+    top:10%;
+    background-color: #dedddd;
+    padding: 100px;
+    border-radius: 10px;
+    background-color: #FF1801;
+}
+.Popup h1{
+    color: #FAFAFA;
+}
+.Popup button{
+    margin-top: 15px;
+    padding: 5px;
+    background-color: #FAFAFA;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.Popup button:hover{
+    background-color: #cdcdcd;
+}
+.hidepopup{
+    visibility: hidden;
+}
+

@@ -1,11 +1,17 @@
 import React, {useState} from "react";
+import "../css/compare.css"
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
 
 const Compare = ()=>{
 
     const [error, setError] = useState(null);
     const [year, setYear] = useState("");
     const [circuit, setcircuit] = useState("");
-    const [selectedOption,setselectedOption] = useState();
+    const [selectedOption,setselectedOption] = useState("");
+    const [showPopup,setshowPopup] = useState(false)
 
     let content = [
         { id:"badoer", name:"badoer",surname:"Luca",wins : null, perf :  null, nbRaces :null},
@@ -49,7 +55,6 @@ const Compare = ()=>{
             }
         }
         content.sort((n1,n2) => n1.perf -n2.perf);
-        setPilot(content)
     }
     const setclassmentPilotWins = (item,pilotName)=>{
         for(const racer of content){
@@ -59,7 +64,6 @@ const Compare = ()=>{
             }
         }
         content.sort((n1,n2) => n2.wins -n1.wins);
-        setPilot(content)
     }
 
     const displayscorePilot =(key)=>{
@@ -84,13 +88,13 @@ const Compare = ()=>{
             for(const Pilot of pilot){
                 console.log(Pilot);
                 let url = "";
-                if((year!=null) && (circuit!=null)){
+                if((year!="") && (circuit!="")){
                     url = ("https://ergast.com/api/f1/"+year+"/drivers/"+Pilot.id+"/circuits/"+circuit+"/results"+urlwins+".json");
                 }
-                else if(year!=null){
+                else if(year!=""){
                     url = ("https://ergast.com/api/f1/"+year+"/drivers/"+Pilot.id+"/results"+urlwins+".json?limit=100");
                 }
-                else if(circuit!=null){
+                else if(circuit!=""){
                     url = ("https://ergast.com/api/f1/drivers/"+Pilot.id+"/circuits/"+circuit+"/results"+urlwins+".json?limit=100");
                 }
                 else{
@@ -98,16 +102,26 @@ const Compare = ()=>{
                 }
                 callApi(Pilot.id,url);
             }
+        setPilot(content)
+        setPilot(content)
+        togglePopup()
     }
 
-    let handleChangeYear = (event) =>{
+    const handleChangeYear = (event) =>{
         setYear(event.target.value);
     }
-    let handleChangeCircuit = (event) =>{
+    const handleChangeCircuit = (event) =>{
         setcircuit(event.target.value);
     }
-    let handleOptionChange = (event) =>{
+    const handleOptionChange = (event) =>{
         setselectedOption(event.target.value);
+        console.log(event.target.value)
+    }
+    const togglePopup = () => {
+        setshowPopup(true)
+    }
+    const disactivePopup = () => {
+        setshowPopup(false)
     }
 
     if (error) {
@@ -117,7 +131,7 @@ const Compare = ()=>{
             <div>
                 <div>
                     <h1>Compare Drivers:</h1>
-                    <form method="get">
+                    <FormControl className="c-compare__form" component="fieldset">
                         <div>
                             <label>Year : </label>
                             <input type="number" id="Year" minLength="4" maxLength="4" value={year} onChange={handleChangeYear} />
@@ -126,14 +140,19 @@ const Compare = ()=>{
                             <label>Circuit : </label>
                             <input type="text" id="circuit" value={circuit} onChange={handleChangeCircuit} />
                         </div>
-                        <div>
-                            <input type="radio" id="performance" value="performance" onChange={handleOptionChange} />
-                            <label>Performance : </label>
-                            <input type="radio" id="wins" value="Wins" onChange={handleOptionChange} />
-                            <label>More Wins : </label>
-                        </div>
+                        <RadioGroup aria-label="gender" name="gender1" value={selectedOption} onChange={handleOptionChange}>
+                            <FormControlLabel value="performance" control={<Radio />} label="Performance" />
+                            <FormControlLabel value="Wins" control={<Radio />} label="Wins" />
+                        </RadioGroup>
                         <input type="button" value="Confirm" onClick={handleSubmit} />
-                    </form>
+                    </FormControl>
+                    <div className="c-compare__popup">
+                        <div className={showPopup ? " Popup" : "Popup hidepopup"}>
+                            <h1>Compare set</h1>
+                            <button onClick={disactivePopup}>Close</button>
+                        </div>
+                    </div>
+
                 </div>
                 <div>
                     <h1>Pilot on compare</h1>
