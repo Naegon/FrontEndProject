@@ -29,6 +29,7 @@
     padding-top: 14px;
 }
 .c-mainpage_colName{
+    padding-top: 15px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
