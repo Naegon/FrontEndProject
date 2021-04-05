@@ -88,13 +88,13 @@ const Compare = ()=>{
             for(const Pilot of pilot){
                 console.log(Pilot);
                 let url = "";
-                if((year!="") && (circuit!="")){
+                if((year!=="") && (circuit!=="")){
                     url = ("https://ergast.com/api/f1/"+year+"/drivers/"+Pilot.id+"/circuits/"+circuit+"/results"+urlwins+".json");
                 }
-                else if(year!=""){
+                else if(year!==""){
                     url = ("https://ergast.com/api/f1/"+year+"/drivers/"+Pilot.id+"/results"+urlwins+".json?limit=100");
                 }
-                else if(circuit!=""){
+                else if(circuit!==""){
                     url = ("https://ergast.com/api/f1/drivers/"+Pilot.id+"/circuits/"+circuit+"/results"+urlwins+".json?limit=100");
                 }
                 else{
