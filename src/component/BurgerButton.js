@@ -2,7 +2,7 @@ import React from "react";
 import "../css/burgerbutton.css"
 
 const BurgerButton = ({id}) => {
-    let onClickBurger = () => {
+    let onClickBurger = () => {/*onclick of the burger button disable the burger icon and element title of teh navbar*/
         let burger = document.getElementById(id);
         burger.classList.toggle("is-active");
 

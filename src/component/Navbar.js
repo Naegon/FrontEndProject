@@ -5,7 +5,7 @@ import BurgerButton from "./BurgerButton";
 
 const Navbar = () => {
 
-    const onCLickLinkNavbar = () => {
+    const onCLickLinkNavbar = () => {/*on click on link of navbar disable burger icon and overlay of navbar in case of <736px screen width */
         let navbar = document.getElementById("e-navbar");
         if(window.innerWidth < 736){
             let burger = document.getElementById("e-btn__burger");

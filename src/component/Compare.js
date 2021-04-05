@@ -15,7 +15,12 @@ const Compare = ()=>{
 
     let content = [
         { id:"badoer", name:"badoer",surname:"Luca",wins : null, perf :  null, nbRaces :null},
-        { id:"alonso", name:"alonso",surname:"Fernando",wins : null, perf :  null, nbRaces :null}
+        { id:"alonso", name:"alonso",surname:"Fernando",wins : null, perf :  null, nbRaces :null},
+        { id:"barrichello", name:"Barrichello",surname:"Rubens",wins : null, perf :  null, nbRaces :null},
+        { id:"button", name:"Button",surname:"Jenson",wins : null, perf :  null, nbRaces :null},
+        { id:"friesacher", name:"Friesacher",surname:"Patrick",wins : null, perf :  null, nbRaces :null},
+        { id:"monteiro", name:"Monteiro",surname:"Tiago",wins : null, perf :  null, nbRaces :null},
+        { id:"michael_schumacher", name:"Schumacher",surname:"Michael",wins : null, perf :  null, nbRaces :null},
     ];
     const [pilot,setPilot] = useState(content) ;
 
@@ -25,7 +30,6 @@ const Compare = ()=>{
             .then(res => res.json())
             .then(
                 (result) => {
-                    // setItems(result.MRData.RaceTable.Races);
                     if(selectedOption === "Wins"){
                         setclassmentPilotWins(result.MRData.RaceTable.Races,pilotName);
                     }
@@ -41,13 +45,13 @@ const Compare = ()=>{
 
     const setclassmentPilotPerf = (item,pilotName)=>{
         let perf =0;
-        for(const resultat of item){
+        for(const resultat of item){/*set the performance give by the api */
 
            perf += parseInt(resultat.Results[0].position);
         }
         perf = parseInt(perf/item.length);
 
-        for(const racer of content){
+        for(const racer of content){/*set the performance in the right name */
             if(racer.id === pilotName){
                 racer.perf = perf;
                 racer.nbRaces = item.length;
@@ -57,7 +61,7 @@ const Compare = ()=>{
         content.sort((n1,n2) => n1.perf -n2.perf);
     }
     const setclassmentPilotWins = (item,pilotName)=>{
-        for(const racer of content){
+        for(const racer of content){/*set the number wins */
             if(racer.id === pilotName){
                 racer.wins = item.length;
                 console.log(racer.wins,pilotName);
@@ -69,13 +73,13 @@ const Compare = ()=>{
     const displayscorePilot =(key)=>{
         const value = pilot[key]
         console.log(value.wins,value);
-        if(value.wins != null){
+        if(value.wins != null){/*case of wins selected*/
             return <p> {value.name + " " +value.surname + " : " +value.wins+" wins"}</p>;
         }
-        else if(value.perf != null){
+        else if(value.perf != null){/*case of performance selected*/
             return <p> {value.name + " " +value.surname + " : " +value.perf+" ratio on "+value.nbRaces+" races"}</p>;
         }
-        else {
+        else {/*at first*/
             return <p> {value.name + " " +value.surname}</p>;
         }
     }

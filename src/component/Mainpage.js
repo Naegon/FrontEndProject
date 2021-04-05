@@ -15,14 +15,14 @@ const Mainpage = ()=>{
         constructorArray = []
         let check = false;
         let points = 0;
-        for(const resultat of item.Results){
+        for(const resultat of item.Results){/*set the classment of the race */
             for(const constructor of constructorArray){
-                if(constructor.name === (resultat.Constructor.name)){
+                if(constructor.name === (resultat.Constructor.name)){/*if the name of the constructor is already on the list, just add points*/
                     constructor.points += parseInt(resultat.points);
                     check = true;
                 }
             }
-            if(check === false) {
+            if(check === false) {/*else add points and name of the constructor*/
                 points = parseInt(resultat.points);
                 constructorArray[constructorArray.length] = {name: resultat.Constructor.name, points: points}
             }
@@ -33,7 +33,7 @@ const Mainpage = ()=>{
     const setclassmentPilot = (item)=>{
         pilotArray = []
         let points =0;
-        for(const resultat of item.Results){
+        for(const resultat of item.Results){/*set the classment of the pilot on the race no need to sort the api did it */
             points = parseInt(resultat.points);
             const id = resultat.Driver.driverId;
             const name = resultat.Driver.familyName;
