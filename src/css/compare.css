@@ -94,7 +94,7 @@
 }
 
 
-#PilotOnCompare
+.c-compare-pilotOnCompare
 {
     display: block;
     margin: 50px auto;
@@ -114,4 +114,98 @@
 .PilotOnCompare p
 {
     color: black;
+}
+
+@media (max-width: 767px) {
+    .c-compare__filterDriver
+    {
+        width: 90%;
+    }
+    .c-compare-pilotOnCompare{
+        width: 90%;
+        padding-bottom: 32px;
+    }
+    .Popup{
+        padding: 90px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px){
+    .c-compare__filterDriver
+    {
+        width: 70%;
+    }
+    .c-compare-pilotOnCompare{
+        width: 70%;
+        padding-bottom: 64px;
+    }
+    .Popup{
+        padding: 90px;
+    }
+}
+@media (min-width: 2000px){
+    .c-compare{
+        padding-top: 200px;
+
+    }
+    .c-compare h1{
+        font-size: 4rem;
+
+    }
+    .c-compare__filterDriver
+    {
+        width: 60%;
+        padding-bottom: 64px;
+        padding-top: 64px;
+    }
+    .c-compare-pilotOnCompare{
+        width: 60%;
+        padding-bottom: 64px;
+    }
+    #compareDriversTitle{
+        font-size: 4rem;
+    }
+    .c-compare label,p{
+        font-size: 2.5rem;
+
+    }
+    .c-compare-filterinput{
+        width: 600px;
+    }
+    .c-compare__form input[type="number"],input[type="text"] {
+        height: 48px;
+        width: 50%;
+
+        padding-left: 15px;
+        margin-bottom: 15px;
+    }
+    .c-compare__form input[type="number"]{
+        margin-left: 13px;
+    }
+    .c-compare__form input[type="text"]{
+        margin-right: 40px;
+    }
+    #circuitlabel{
+        padding-right: 14px;
+    }
+
+    .c-scoreboard{
+        padding-top: 110px;
+
+    }
+    #buttonConfirm{
+        height: 48px;
+        font-size: 2rem;
+    }
+    .Popup{
+        top:15%;
+        padding: 150px;
+    }
+    .Popup h1{
+        font-size: 4.5rem;
+    }
+    .Popup button{
+        height: 80px;
+        width: 128px;
+        font-size: 2rem;
+    }
 }
