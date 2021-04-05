@@ -1,0 +1,141 @@
+.c-scoreboard{
+    position: relative;
+    background-image: url("../ressources/images/background_scoreboard.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    font-family: Lato;
+}
+.c-scoreboard-form {
+    color: white;
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+}
+.c-scoreboard-form h1 {
+    padding-right: 10px;
+}
+
+.form-searchBar input[type="number"] {
+    height: 50px;
+    width: 200px;
+    background-color: #FAFAFA;
+    border-radius: 16px;
+    border: none;
+    font-size: 1.25rem;
+    padding-left: 15px;
+}
+.form-searchBar input[type="button"] {
+    margin-left: -53px;
+    height: 35px;
+    width: 35px;
+    padding:10px;
+    border: none;
+    background-color: white;
+    background-image: url("../ressources/svg/loupe.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.form-searchBar input[type="button"]:hover{
+    background-color: #c8c8c8;
+}
+.c-scoreboard-wrapper{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.c-scoreboard-classment{
+    color: white;
+    width: 600px;
+    margin-top: 50px;
+    padding: 30px 30px 100px;
+
+}
+.c-scoreboard-classment h1,h2,h4{
+    font-style: italic ;
+}
+.c-scoreboard-classment h2{
+    padding-bottom: 20px;
+}
+.c-scoreboard-grey{
+    background: linear-gradient(180deg, #4F4F4F 0%, #272727 72.4%, #000000 100%);
+    border-radius: 10px;
+}
+.c-scoreboard-black{
+    background: linear-gradient(180deg, #000000 0%, #272727 62.5%, #000000 100%);
+    border-radius: 10px;
+}
+
+.c-scoreboard_colName{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 64px;
+    font-style: italic;
+}
+.c-scoreboard_colName-constructor{
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.c-scoreboard-content{
+    display: grid;
+    grid-template-columns: 1fr  1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 13px;
+    font-style: italic;
+    align-items: center;
+}
+.c-scoreboard-content p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.c-scoreboard-content-container{
+    grid-template-columns: 1fr  1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 64px;
+}
+
+.e-scoreboard-pos{
+    background-color: #FAFAFA;
+    margin:40px;
+    color: black;
+    border-radius: 10px;
+    font-weight: bold;
+
+}
+@media (max-width: 768px) {
+    .c-scoreboard-classment{
+        padding-bottom: 100px;
+    }
+    .e-scoreboard-pos{
+        margin:10px;
+    }
+}
+@media (min-width: 769px) and (max-width: 1024px){
+    .c-scoreboard-classment{
+        padding-bottom: 100px;
+    }
+    .c-scoreboard{
+        padding-top: 80px;
+
+    }
+}
+@media (min-width: 1025px) and (max-width: 1500px){
+
+    .c-scoreboard-classment{
+        padding-bottom: 30px;
+        margin-top: 20px;
+    }
+    .c-scoreboard{
+        padding-top: 90px;
+    }
+
+}
+@media (min-width: 1500px){
+    .c-scoreboard{
+        padding-top: 110px;
+
+    }
+}
