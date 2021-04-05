@@ -32,14 +32,14 @@ const Scoreboard = ()=>{
         let check = false;
         let points = 0;
         constructorArray = constructorClassments;
-        for(const resultat of item.Results){
+        for(const resultat of item.Results){/*set the classment of the race */
             for(const constructor of constructorClassments){
-                if(constructor.name === (resultat.Constructor.name)){
+                if(constructor.name === (resultat.Constructor.name)){/*if the name of the constructor is already on the list, just add points*/
                     constructor.points += parseInt(resultat.points);
                     check = true;
                 }
             }
-            if(check === false) {
+            if(check === false) {/*else add points and name of the constructor*/
                 points = parseInt(resultat.points);
                 constructorArray[constructorArray.length] = {name: resultat.Constructor.name, points: points}
             }
@@ -51,14 +51,14 @@ const Scoreboard = ()=>{
         pilotArray = Pilotclassment
         let check = false;
         let points =0;
-        for(const resultat of item.Results){
+        for(const resultat of item.Results){/*set the classment of the pilot on the race we sort because it for all the year and not one race */
             for(const pilot of Pilotclassment){
-                if(pilot.id === (resultat.Driver.driverId)){
+                if(pilot.id === (resultat.Driver.driverId)){/*if the name of the pilot is already on the list, just add points*/
                     pilot.points += parseInt(resultat.points);
                     check = true;
                 }
             }
-            if(check === false){
+            if(check === false){/*else add points and name of the pilot*/
                 points = parseInt(resultat.points);
                 const id = resultat.Driver.driverId;
                 const name = resultat.Driver.familyName;
