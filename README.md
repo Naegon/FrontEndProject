@@ -2,6 +2,13 @@
 
 Our project was made by mob programming in order to be more efficient. So if there is only one person committing it's normal.
 
+Install project Configuration :
+
+1) git clone https://github.com/Naegon/FrontEndProject.git
+2) npm install
+3) npm update --force (in the case of error version not available of chokidar)
+4) npm run start
+
 *4th year front end project at Efrei Paris*
 
 ## Topic
