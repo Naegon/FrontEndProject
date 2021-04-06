@@ -71,7 +71,24 @@ const Scoreboard = ()=>{
         pilotArray.sort((n1,n2) => n2.points -n1.points);
     }
 
+    const resetclassment = () =>
+    {
+        pilotArray = Pilotclassment
+        constructorArray = constructorClassments;
+
+        for(const pilot of Pilotclassment)
+        {
+            pilot.points = 0;
+        }
+
+        for(const constructor of constructorClassments)
+        {
+            constructor.points = 0;
+        }
+    }
+
     let handleSubmit = () =>{
+        resetclassment()
         for(const item of items){
             setclassmentConstructor(item)
             setclassmentPilot(item)
