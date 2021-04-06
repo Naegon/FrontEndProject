@@ -43,7 +43,7 @@ const Mainpage = ()=>{
     }
 
     useEffect(() => {
-        fetch("http://ergast.com/api/f1/2020/results.json?limit=1000")
+        fetch("http://ergast.com/api/f1/current/results.json?limit=1000")
             .then(res => res.json())
             .then(
                 (result) => {
